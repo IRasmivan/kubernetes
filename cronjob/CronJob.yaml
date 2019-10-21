@@ -1,0 +1,50 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: 2019-10-21T12:14:02Z
+  labels:
+    run: hello
+  name: hello
+  namespace: mtp-tcs
+  resourceVersion: "87282094"
+  selfLink: /apis/batch/v1beta1/namespaces/mtp-tcs/cronjobs/hello
+  uid: 44fddba1-f3fc-11e9-9187-000d3aba73a2
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            run: hello
+        spec:
+          containers:
+          - args:
+            - /bin/bash
+            - -c
+            - curl -X POST https://hooks.slack.com/services/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
+              -H 'Content-Type:application/json' -d '{"channel":"#test_rasmi","username":"webhookbot","text":"This
+              is posted to ft-wisebits channel and comes from a bot named webhookbot.
+              This is a Test!!!","icon_emoji":":ghost:"}'
+            image: buildpack-deps:curl
+            imagePullPolicy: IfNotPresent
+            name: hello
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/1 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
