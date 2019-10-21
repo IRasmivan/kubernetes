@@ -9,10 +9,6 @@ metadata:
   labels:
     run: hello
   name: hello
-  namespace: mtp-tcs
-  resourceVersion: "87282094"
-  selfLink: /apis/batch/v1beta1/namespaces/mtp-tcs/cronjobs/hello
-  uid: 44fddba1-f3fc-11e9-9187-000d3aba73a2
 spec:
   concurrencyPolicy: Allow
   failedJobsHistoryLimit: 1
